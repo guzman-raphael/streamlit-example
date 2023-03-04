@@ -25,7 +25,8 @@ st.title("Streamlit Keycloak example")
 keycloak = login(
     url="https://accounts.datajoint.com",
     realm="master",
-    client_id="works",
+    client_id=st.secrets["auth"]["client_id"],
+    client_secret=st.secrets["auth"]["client_secret"],
 )
 
 if keycloak.authenticated:
