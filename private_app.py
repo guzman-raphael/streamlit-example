@@ -15,7 +15,7 @@ def get_connection(**kwargs):
             password=keycloak.access_token,
         )
     else:
-        st.error("Incomplete credentials")
+        st.warning("Waiting for credentials...")
         st.stop()
 
 conn = get_connection(
