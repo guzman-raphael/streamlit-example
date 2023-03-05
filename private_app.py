@@ -11,10 +11,13 @@
 from dataclasses import asdict
 from streamlit_keycloak import login
 import streamlit as st
+import datajoint as dj
 
 
 def main():
     st.subheader(f"Welcome {keycloak.user_info['preferred_username']}!")
+    conn = dj.Connection(host=st.secrets["database_server"], user=keycloak.user_info['preferred_username'], password=keycloak.access_token)
+    st.write(dj.list_schemas(connection=conn))
     st.write(f"Here is your user information:")
     st.write(asdict(keycloak))
     if st.button("Disconnect"):
