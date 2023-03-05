@@ -19,6 +19,6 @@ def get_connection():
         )
 
 conn = get_connection()
-
-st.title(f"{conn.conn_info['user']}'s schemas:")
-st.write(dj.list_schemas(connection=conn))
+if conn:
+    st.title(f"{conn.conn_info['user']}'s schemas:")
+    st.write(dj.list_schemas(connection=conn))
