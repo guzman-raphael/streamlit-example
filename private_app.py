@@ -14,12 +14,13 @@ def get_connection(**kwargs):
             user=keycloak.user_info["preferred_username"],
             password=keycloak.access_token,
         )
+    else:
+        st.error("Incomplete credentials")
+        st.stop()
 
-
-if (conn:=get_connection(
+conn = get_connection(
     url="https://keycloak.dev.datajoint.io", realm="master", client_id="my-client"
-)):
-    st.write(f"{conn.conn_info['user']}'s schemas:")
-    st.write(dj.list_schemas(connection=conn))
-else:
-    st.write("Incomplete credentials")
+)
+
+st.write(f"{conn.conn_info['user']}'s schemas:")
+st.write(dj.list_schemas(connection=conn))
