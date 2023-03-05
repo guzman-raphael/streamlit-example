@@ -11,7 +11,7 @@ def get_connection():
         realm="master",
         client_id='my-client',
     )
-    host = st.experimental_get_query_params()["database_host"][0]
+    host = st.experimental_get_query_params().get("database_host", [None])[0]
     if keycloak.authenticated and host:
         return dj.Connection(
             host=host,
