@@ -18,9 +18,9 @@ def get_connection():
         url="https://keycloak.dev.datajoint.io",
         realm="master",
         client_id='my-client',
-        init_options={
-            "checkLoginIframe": False
-        },
+        # init_options={
+        #     "checkLoginIframe": False
+        # },
     )
     if keycloak.authenticated:
         return dj.Connection(
@@ -31,6 +31,7 @@ def get_connection():
 
 conn = get_connection()
 
+st.title("user's schemas:")
 st.write(dj.list_schemas(connection=conn))
 
 
