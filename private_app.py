@@ -1,4 +1,4 @@
-# https://guzman-raphael-streamlit-example-private-app-qhzxwd.streamlit.app/
+# https://guzman-raphael-streamlit-example-private-app-qhzxwd.streamlit.app?database_host=example.com
 
 import streamlit as st
 import streamlit_keycloak
@@ -11,14 +11,17 @@ def get_connection():
         realm="master",
         client_id='my-client',
     )
-    if keycloak.authenticated:
+    host = st.experimental_get_query_params()["database_host"][0]
+    if keycloak.authenticated and host:
         return dj.Connection(
-            host=st.secrets["database_server"],
+            host=host,
             user=keycloak.user_info['preferred_username'],
             password=keycloak.access_token
         )
 
 conn = get_connection()
 if conn:
-    st.title(f"{conn.conn_info['user']}'s schemas:")
+    st.write(f"{conn.conn_info['user']}'s schemas:")
     st.write(dj.list_schemas(connection=conn))
+else:
+    st.write("Not ready")
