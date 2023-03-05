@@ -1,31 +1,14 @@
 # https://guzman-raphael-streamlit-example-private-app-qhzxwd.streamlit.app?database_host=example.com&context={"workflow_template":"template1","organization":"org1","workflow":"wf1"}
 # http://localhost:8501?database_host=example.com&context={"workflow_template":"template1","organization":"org1","workflow":"wf1"}
 
-import json
+# https://guzman-raphael-streamlit-example-private-app-qhzxwd.streamlit.app?database_host=example.com&context={"workflow_template":"template1","organization":"org1","workflow":"wf1"}
+# http://localhost:8501?database_host=example.com&context={"workflow_template":"template1","organization":"org1","workflow":"wf1"}
+
 import streamlit as st
-import streamlit_keycloak
 import datajoint as dj
+import utils
 
-
-def get_session(**kwargs):
-    if (host:=st.experimental_get_query_params().get("database_host")) and (
-        keycloak:=streamlit_keycloak.login(**kwargs)
-    ).authenticated:
-        return {
-            'connection': dj.Connection(
-                host=host[0],
-                user=keycloak.user_info["preferred_username"],
-                password=keycloak.access_token,
-            ),
-            'context': json.loads(
-                st.experimental_get_query_params().get("context", ["{}"])[0]
-            ),
-        }
-    else:
-        st.warning("Waiting for credentials...")
-        st.stop()
-
-session = get_session(
+session = utils.get_session(
     url="https://keycloak.dev.datajoint.io", realm="master", client_id="my-client"
 )
 
