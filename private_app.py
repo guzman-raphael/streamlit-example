@@ -23,7 +23,7 @@ def main():
 
 st.title("Streamlit Keycloak example")
 keycloak = login(
-    url="https://keycloak.dev.datajoint.io/",
+    url="https://keycloak.dev.datajoint.io",
     realm="master",
     client_id='my-client',
     init_options={
