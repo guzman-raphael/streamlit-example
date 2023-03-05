@@ -34,3 +34,7 @@ st.write(session['context'])
 
 st.write(f"{session['connection'].conn_info['user']}'s schemas:")
 st.write(dj.list_schemas(connection=session['connection']))
+
+schema_name = "guzman-raphael_fizzle-proj_ephys"
+ephys = dj.VirtualModule(schema_name, schema_name, connection=session['connection'])
+st.image(dj.Di(ephys).make_png(), caption=f"{schema_name}'s diagram")
