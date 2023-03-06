@@ -1,9 +1,6 @@
 # https://guzman-raphael-streamlit-example-private-app-qhzxwd.streamlit.app?database_host=example.com&context={"workflow_template":"template1","organization":"org1","workflow":"wf1"}
 # http://localhost:8501?database_host=example.com&context={"workflow_template":"template1","organization":"org1","workflow":"wf1"}
 
-# https://guzman-raphael-streamlit-example-private-app-qhzxwd.streamlit.app?database_host=example.com&context={"workflow_template":"template1","organization":"org1","workflow":"wf1"}
-# http://localhost:8501?database_host=example.com&context={"workflow_template":"template1","organization":"org1","workflow":"wf1"}
-
 import streamlit as st
 import datajoint as dj
 import utils
