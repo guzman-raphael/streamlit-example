@@ -1,3 +1,3 @@
 import streamlit as st
 
-st.title("Public App 1")
+st.write("Public App 1")
